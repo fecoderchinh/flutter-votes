@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:votes/pages/home.dart';
 import 'package:votes/pages/result.dart';
+import 'package:votes/pages/step_form.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -38,6 +39,15 @@ class MyDrawer extends StatelessWidget {
               // ...
               // Then close the drawer
               Navigator.pushNamed(context, Result.routeName);
+            },
+          ),
+          ListTile(
+            title: const Text('Form'),
+            onTap: () {
+              // Update the state of the app
+              // ...
+              // Then close the drawer
+              Navigator.pushNamed(context, StepForm.routeName);
             },
           ),
         ],

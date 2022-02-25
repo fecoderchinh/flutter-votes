@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:votes/pages/home.dart';
 import 'package:votes/pages/result.dart';
+import 'package:votes/pages/step_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         HomePage.routeName: (context) => const HomePage(),
         Result.routeName: (context) => const Result(),
+        StepForm.routeName: (context) => StepForm(),
       },
       initialRoute: HomePage.routeName,
     );
