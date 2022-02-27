@@ -11,6 +11,8 @@ class StepForm extends StatefulWidget {
   }
 }
 
+enum SingingCharacter { lafayette, jefferson }
+
 class StepFormState extends State<StepForm> {
   int _activeStepIndex = 0;
 
@@ -19,6 +21,26 @@ class StepFormState extends State<StepForm> {
   TextEditingController pass = TextEditingController();
   TextEditingController address = TextEditingController();
   TextEditingController pincode = TextEditingController();
+
+  SingingCharacter? _character = SingingCharacter.lafayette;
+
+  // Default Radio Button Selected Item When App Starts.
+  String radioButtonItem = 'ONE';
+
+  // Group Value for Radio Button.
+  int id = 1;
+
+  String dropdownValue = 'One';
+
+  List <String> spinnerItems = [
+    'One',
+    'Two',
+    'Three',
+    'Four',
+    'Five'
+  ];
+
+  double _currentSliderValue = 1;
 
   List<Step> stepList() => [
     Step(
@@ -88,6 +110,153 @@ class StepFormState extends State<StepForm> {
                   labelText: 'Pin Code',
                 ),
               ),
+              const SizedBox(height: 8,),
+              Column(
+                children: <Widget>[
+                  ListTile(
+                    title: const Text('Lafayette'),
+                    leading: Radio<SingingCharacter>(
+                      value: SingingCharacter.lafayette,
+                      groupValue: _character,
+                      onChanged: (SingingCharacter? value) {
+                        setState(() {
+                          _character = value;
+                        });
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('Thomas Jefferson'),
+                    leading: Radio<SingingCharacter>(
+                      value: SingingCharacter.jefferson,
+                      groupValue: _character,
+                      onChanged: (SingingCharacter? value) {
+                        setState(() {
+                          _character = value;
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8,),
+              Column(
+                children: <Widget>[
+                  Padding(
+                      padding: const EdgeInsets.all(14.0),
+                      child: Text('Selected Radio Item = ' + '$radioButtonItem',
+                          style: const TextStyle(fontSize: 21))
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Radio(
+                        value: 1,
+                        groupValue: id,
+                        onChanged: (val) {
+                          setState(() {
+                            radioButtonItem = 'ONE';
+                            id = 1;
+                          });
+                        },
+                      ),
+                      const Text(
+                        'ONE',
+                        style: TextStyle(fontSize: 17.0),
+                      ),
+
+                      Radio(
+                        value: 2,
+                        groupValue: id,
+                        onChanged: (val) {
+                          setState(() {
+                            radioButtonItem = 'TWO';
+                            id = 2;
+                          });
+                        },
+                      ),
+                      const Text(
+                        'TWO',
+                        style: TextStyle(
+                          fontSize: 17.0,
+                        ),
+                      ),
+
+                      Radio(
+                        value: 3,
+                        groupValue: id,
+                        onChanged: (val) {
+                          setState(() {
+                            radioButtonItem = 'THREE';
+                            id = 3;
+                          });
+                        },
+                      ),
+                      const Text(
+                        'THREE',
+                        style: TextStyle(fontSize: 17.0),
+                      ),
+                      Radio(
+                        value: 4,
+                        groupValue: id,
+                        onChanged: (val) {
+                          setState(() {
+                            radioButtonItem = 'FOUR';
+                            id = 4;
+                          });
+                        },
+                      ),
+                      const Text(
+                        'FOUR',
+                        style: TextStyle(fontSize: 17.0),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8,),
+              Column(children: <Widget>[
+
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: const Icon(Icons.arrow_drop_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.red, fontSize: 18),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  onChanged: (String? data) {
+                    setState(() {
+                      dropdownValue = data!;
+                    });
+                  },
+                  items: spinnerItems.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+
+                Text('Selected Item = ' + '$dropdownValue',
+                    style: const TextStyle
+                      (fontSize: 22,
+                        color: Colors.black)),
+              ]),
+              const SizedBox(height: 8,),
+              Slider(
+                value: _currentSliderValue,
+                max: 8,
+                divisions: 8,
+                label: _currentSliderValue.round().toString(),
+                onChanged: (double value) {
+                  setState(() {
+                    _currentSliderValue = value;
+                  });
+                },
+              )
             ],
           ),
         )),
