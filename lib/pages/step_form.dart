@@ -310,6 +310,10 @@ class StepFormState extends State<StepForm> {
         },
         controlsBuilder: (context, controls) {
           final isLastStep = _activeStepIndex == stepList().length -1;
+          final ButtonStyle _style = ElevatedButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+              padding: const EdgeInsets.all(14.0)
+          );
           return Container(
             child: Row(
               children: [
@@ -329,6 +333,7 @@ class StepFormState extends State<StepForm> {
                     child: ElevatedButton(
                       onPressed: controls.onStepCancel,
                       child: const Text('Back'),
+                      style: _style,
                     ),
                   )
               ],
